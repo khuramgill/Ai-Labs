@@ -1,6 +1,6 @@
-# Task 1: Edit Distance Implementations
+# Task 1
 
-# Iterative Version (Two Pointers Approach)
+# Iterative Version
 def edit_distance_iterative(s1, s2):
     m, n = len(s1), len(s2)
     
@@ -13,10 +13,10 @@ def edit_distance_iterative(s1, s2):
     
     while i < m or j < n:
         if i >= m:
-            count += (n - j)  # Add remaining characters in s2
+            count += (n - j)  
             break
         if j >= n:
-            count += (m - i)  # Add remaining characters in s1
+            count += (m - i)  
             break
         if s1[i] == s2[j]:
             i += 1
@@ -34,7 +34,7 @@ s2 = 'hzkl'
 print(edit_distance_iterative(s1.lower(), s2.lower()))
 
 
-# Recursive Version (Naive)
+# Recursive Version
 def edit_distance_recursive(s1, s2, m, n):
     if m == 0:
         return n
@@ -44,9 +44,9 @@ def edit_distance_recursive(s1, s2, m, n):
         return edit_distance_recursive(s1, s2, m - 1, n - 1)
     
     return 1 + min(
-        edit_distance_recursive(s1, s2, m - 1, n),     # Insertion
-        edit_distance_recursive(s1, s2, m, n - 1),     # Deletion
-        edit_distance_recursive(s1, s2, m - 1, n - 1)  # Replacement
+        edit_distance_recursive(s1, s2, m - 1, n),    
+        edit_distance_recursive(s1, s2, m, n - 1),     
+        edit_distance_recursive(s1, s2, m - 1, n - 1)  
     )
 
 # Driver code
@@ -55,7 +55,7 @@ s2 = 'dig'
 print(edit_distance_recursive(s1.lower(), s2.lower(), len(s1), len(s2)))
 
 
-# Memoized Version (Recursion + Memoization)
+# Memoized
 def edit_distance_memoization(s1, s2, memo, m, n):
     if m == 0:
         return n
@@ -85,18 +85,18 @@ s2 = 'dighg'
 print(edit_distance_memo(s1.lower(), s2.lower()))
 
 
-# Iterative Version (Tabulation / DP)
+# Iterative
 def edit_distance_tabulation(s1, s2):
     m, n = len(s1), len(s2)
     dp = [[0] * (n + 1) for _ in range(m + 1)]
     
-    # Base cases for filling first row and column
+   
     for i in range(m + 1):
-        dp[i][0] = i  # Deletion
+        dp[i][0] = i  
     for j in range(n + 1):
-        dp[0][j] = j  # Insertion
+        dp[0][j] = j  
     
-    # Fill DP table
+    
     for i in range(1, m + 1):
         for j in range(1, n + 1):
             if s1[i - 1] == s2[j - 1]:
@@ -112,9 +112,9 @@ s2 = 'dig'
 print(edit_distance_tabulation(s1.lower(), s2.lower()))
 
 
-# Task 2: Balancing Brackets
+# Task 2
 
-# Iterative Version Using Stack
+# Iterative 
 def balance_brackets_stack(sequence):
     stack = []
     for char in sequence:
@@ -122,11 +122,10 @@ def balance_brackets_stack(sequence):
             stack.append(char)
         elif char == ')':
             if stack and stack[-1] == '(':
-                stack.pop()  # Correct pair found, pop it
+                stack.pop()  
             else:
-                stack.append(char)  # Mismatched closing bracket
+                stack.append(char)      
     
-    # Add necessary parentheses to balance
     return '(' * stack.count(')') + sequence + ')' * stack.count('(')
 
 # Driver code
@@ -134,10 +133,9 @@ s = "a+b)((c+d"
 print(balance_brackets_stack(s))
 
 
-# Recursive Version
+# Recursive
 def balance_brackets_recursive(sequence, index=0, open_count=0, close_count=0):
     if index == len(sequence):
-        # Return corrected sequence with extra parentheses if needed
         return '(' * close_count + sequence + ')' * open_count
     
     char = sequence[index]
