@@ -160,3 +160,6 @@ add_edge(adj, 1, 3)
 add_edge(adj, 1, 4)
 add_edge(adj, 2, 4)
 bfs(adj, 4)
+
+if __name__ == "__main__":
+    pass 
